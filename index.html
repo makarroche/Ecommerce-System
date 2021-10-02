@@ -1,0 +1,315 @@
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="js/jquery-qrcode-0.14.0.min.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
+		<script type="text/javascript" src="js/Chart.bundle.js"></script>
+		<link href="css/style.css" rel="stylesheet" type="text/css"/>
+		
+		<title>Sistema de gestión interna</title>
+	</head>
+	<body>
+		<div id="menu">
+			<ul>
+				<li><a href="javascript:backHome()">Home</a></li>
+				<li class="dropdown">
+					<a href="javascript:void(0)" class="dropbtn">Registros</a>
+			    	<div class="dropdown-content">
+			      		<a href="javascript:registroCliente()">Cliente</a>
+			      		<a href="javascript:registroArtículo()">Artículo</a>
+			      		<a href="javascript:registroPedidoDeCompra()">Pedido de Compra</a>
+	    			</div>
+	  			</li>
+	  			<li class="dropdown">
+					<a href="javascript:void(0)" class="dropbtn">Actualizaciones</a>
+			    	<div class="dropdown-content">
+			      		<a href="javascript:actualizarEstadoDePedidoDeCompra()">Estado de Pedido de Compra</a>
+	    			</div>
+	  			</li>
+	  			<li class="dropdown">
+					<a href="javascript:void(0)" class="dropbtn">Consultas</a>
+			    	<div class="dropdown-content">
+			      		<a href="javascript:consultaArtículos()">Artículos</a>
+			      		<a href="javascript:consultaTrazabilidadPedidoCompra()">Trazabilidad de Pedido de Compra</a>
+			      		<a href="javascript:consultaPedidos()">Pedidos</a>
+			      		<a href="javascript:consultaPedidosSimilares()">Pedidos Similares</a>
+	    			</div>
+	  			</li>
+			</ul>
+		</div>
+		<div id= "contenidoHome">
+			<div id = "fondoHome">
+				<h1>Bienvenido al sistema de gestión interna de ComprasUY</h1>
+			</div>
+			<div id="textoHome">
+				<ul>
+					<div class = "listReg">
+						<ul>
+							<li id="registros"><strong>Registros</strong></li><br><br>
+							<li class="item"><a href="javascript:registroCliente()">Registro de Cliente</a></li><br>
+							<li class="item"><a href="javascript:registroArtículo()">Registro de Artículo</a></li><br>
+							<li class="item"><a href="javascript:registroPedidoDeCompra()">Registro de Compra</a></li><br><br><br><br>
+							<li class="item"><img class= "listFoto" src="img\registericon.png" width="80" height="80"></li>
+						</ul>	
+					</div>
+
+					<div class = "listAct">
+						<ul>
+							<li class="actividades"><strong>Actualizaciones</strong></li><br><br>
+							<li class="item"><a href="javascript:actualizarEstadoDePedidoDeCompra()">Actualización de estado de pedido de compra</a></li><br><br><br><br><br><br><br><br>
+							<li class="item"><img class= "listFoto" src="img\actualizationicon.png" width="80" height="80"></li>
+						</ul>	
+					</div>
+					
+					<div class = "listCons">
+						<ul>
+							<li class="actividades"><strong>Consultas</strong></li><br><br>
+							<li class="item"><a href="javascript:consultaArtículos()">Consultas de artículos</a></li><br>
+							<li class="item"><a href="javascript:consultaTrazabilidadPedidoCompra()">Consultas de trazabilidad de pedidos de compra</a></li><br>
+							<li class="item"><a href="javascript:consultaPedidos()">Consultas de pedidos</a></li><br>
+							<li class="item"><a href="javascript:consultaPedidosSimilares()">Consultas de pedidos similares</a></li><br><br>
+							<li class="item"><img class= "listFoto" src="img\queryicon.png" width="80" height="80"></li>
+						</ul>	
+					</div>
+				</ul>
+			</div>
+		</div>
+
+		<div id= "contenidoRegCliente" class="contenidoPagina" hidden>
+            <h1><strong>Registro de Cliente</strong></h1>
+
+            <form action="" method="post" onsubmit="return false" id="formRegCliente" class="form">
+
+                <label for="nom">Nombre</label><br>
+                <input type="text" name="nom" id="nom" maxlength="20" placeholder="Ingrese nombre"><br><br>
+                <label for="apell">Apellido</label><br>
+                <input type="text" name="apell" id="apell" maxlength="20" placeholder="Ingrese apellido"><br><br>
+                <label for="edad">Edad</label><br>
+                <input type="number" name="edad" id="edad" min="18" max="100" placeholder="Ingrese edad"><br><br>
+                <label for="sexo">Sexo</label><br>
+                <select id="sexo" name="sexo" class="select_box">
+                    <option value="Masculino" selected>Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+				<br><br>
+                <label for="cel">Celular</label><br>
+                <input type="number" name="cel" id="cel" maxlength="30" placeholder="Ingrese celular"><br><br>
+
+                <label for="mail">E-mail</label><br>
+                <input type="email" name="mail" id="mail" placeholder="Ingrese e-mail"><br><br>
+
+                <label for="direc">Dirección</label><br>
+                <input type="text" name="direc" id="direc" size="30" maxlength="30" placeholder="Ingrese dirección"><br><br>
+
+                <label for="direc">Barrio</label><br>
+                <select id="mySelect" name="mySelect" class="select_box"></select>
+
+                <button type="button" id="agrBarr" class="button" onclick="mostrarOpcionesBarrio()">Agregar Barrio</button><br><br>
+                <textarea rows="3" cols="25" name="area" id="area" placeholder="Ingresar Barrio Nuevo" hidden></textarea><br><br>
+                <button type="button" id="confirmar" class="button" onclick="agregarBarrio()" hidden>Confirmar</button><br><br>
+
+                <button type="button" class="button" onclick="checkRegCliente(getInput('nom'), getInput('apell'), getInput('edad'), getInput('sexo'), getInput('cel'), getInput('mail'), getInput('direc'), getInput('mySelect'))">Registrar</button>
+                <button type="reset" class="button">Cancelar</button>
+
+            </form>
+        </div>
+
+		<div id= "contenidoRegArticulo" class="contenidoPagina" hidden>
+			<h1><strong>Registro de Artículo</strong></h1>
+
+			<form action="" method="post" onsubmit="return false" id="formRegArticulo" class="form">
+
+				<label for="nomArt">Nombre</label><br>
+				<input type="text" name="nomArt" id="nomArt" size="25" maxlength="20" placeholder="Ingrese nombre"><br><br>
+			 	<label for="codigoArt">Código</label><br>
+			 	<input type="number" name="codigoArt" id="codigoArt" placeholder="Ingrese código"><br><br>
+			 	<label for="descArt">Descripción</label><br>
+			 	<textarea rows="3" cols="25" name="descArt" id="descArt" placeholder="Breve descripción del artículo.."></textarea><br><br>
+			 	<label for="precioArt">Precio</label><br>
+			 	<input type="number" name="precioArt" id="precioArt" placeholder="Ingrese precio"><br><br>
+			 	<label for="categoría">Categoría</label><br>
+	            <select id="mySelectCat" name="mySelectCat" onchange="cambiarFotoCat(getInput('mySelectCat'))" class="select_box">
+	            	<option value="Juguetes">Juguetes</option>
+	  				<option value="Escolares">Escolares</option>
+	  				<option value="Escritorio">Escritorio</option>
+	  				<option value="Alimentos">Alimentos</option>
+	  				<option value="Limpieza">Limpieza</option>
+	  				<option value="Otros">Otros</option>
+	            </select><br><br>
+	            <div class="divFotoQR">
+	            	<div class="catFotoQR"><img class="catFoto" src="img\juguetes.jpg"></div><br><br>
+	            	<div class="catFotoQR" id="container"></div><br><br>
+	            </div>
+	            
+	            <button type="button" class="button" onclick="checkRegArticulo(getInput('nomArt'), getInput('codigoArt'), getInput('descArt'), getInput('precioArt'), getInput('mySelectCat'))">Registrar</button>
+	            <button type="reset" class="button" onclick="cancelRegArticulo()">Cancelar</button><br><br>
+	        </form>
+        </div>
+        
+		<div id= "contenidoRegPedComp" class="contenidoPagina" hidden>
+			<h1><strong>Registro de Pedido de Compra</strong></h1>
+
+			<form action="" method="post" onsubmit="return false" id="formRegPedComp" class="form">
+
+				<label for="clientes">Clientes</label><br>
+				<select id="mySelectClientes" name="mySelectClientes" class="select_box"></select><br><br>
+
+			 	<div class="divFiltrar">
+					<label for="articulos">Artículos</label>
+		            <select id="filtrarCat" name="filtrarCat" onchange="filtrarCategoria(getInput('filtrarCat'))" class="select_box">
+		            	<option value="Filtrar" selected>Filtrar por</option>
+		            	<option value="Juguetes">Juguetes</option>
+		  				<option value="Escolares">Escolares</option>
+		  				<option value="Escritorio">Escritorio</option>
+		  				<option value="Alimentos">Alimentos</option>
+		  				<option value="Limpieza">Limpieza</option>
+		  				<option value="Otros">Otros</option>
+		            </select>
+				</div>
+			 	
+			 	<select id="mySelectArt" name="mySelectArt" class="select_box"></select><br><br>
+
+				<label for="cUnidades">Cantidad de Unidades</label><br>
+				<input type="number" name="cUnidades" id="cUnidades" placeholder="Ingrese cantidad de unidades"  value = 1 min=1><br><br>
+
+			 	<button type="button" class="button" onclick="checkAgregarAlPedido(getInput('mySelectArt'), getInput('cUnidades'))">Agregar al Pedido</button><br><br><br><br>
+
+			 	<label for="resumenCompra"><strong>Resumen del Pedido de Compra</strong></label><br><br><br>
+
+			 	<table class="table-fill" id="tablaResumen" hidden>
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Cantidad</th>
+							<th>Precio Unitario</th>
+							<th>Subtotal</th>
+						</tr>
+					</thead>
+					<tbody id="contenidoResumenCompra">
+					</tbody>
+				</table>
+				<br><br>
+			 	<label for="cantArticulos">Cantidad de Artículos del Pedido</label><br>
+			 	<input type="number" name="cantArticulos" id="cantArticulos" value= "" readonly><br><br>
+			 	
+			 	<label for="precioTotalPedido">Precio Total del Pedido</label><br>
+			 	<input type="number" name="precioTotalPedido" id="precioTotalPedido" readonly><br><br>
+
+				<button type="button" class="button" onclick="emitirPedido(getInput('mySelectClientes'))">Emitir Pedido</button>
+				<button type="reset" class="button" onclick="cancelPedidoCompra()">Cancelar</button>
+			</form>
+		</div>
+
+		<div id= "contenidoEstadoDePedidoDeCompra" class="contenidoPagina" hidden>
+			<h1><strong>Actualización de Estado de Pedido de Compra</strong></h1>
+			<p>Aquí se muestran todos los pedidos con su estado actual y se podrá seleccionar cualquiera de ellos para cambiar su estado al siguiente estado posible.</p>
+			<form action="" method="post" onsubmit="return false" id="formEstadoPedComp" class="form">
+				<label for="pedidos"><strong>Pedidos</strong></label><br>
+				<select id="mySelectPedidos" name="mySelectPedidos" class="select_box" onchange="displayEstado(getInput('mySelectPedidos'))"></select><br><br>
+				<label for="estado">Estado</label><br>
+				<input type="text" name="estado" id="estado" readonly><br><br>
+				<label for="fecha">Fecha de Cambio de Estado</label><br>
+				<input type="date" name="fechaCambioEstado" id="fechaCambioEstado"><br><br>
+				<label for="observaciones">Observaciones</label><br>
+				<textarea name="observaciones" id="observaciones" placeholder="Observaciones.."></textarea><br><br>
+				<button id = "actualizarButton" type="button" class="button" onclick="actualizarEstadoPedido(getInput('mySelectPedidos'), getInput('fechaCambioEstado'), getInput('observaciones'))">Actualizar Estado</button>
+				<button type="reset" class="button" id = "actualizarCancelButton">Cancelar</button>
+			</form>	
+		</div>
+
+		<div id= "contenidoConsultaArticulos" class="contenidoPagina" hidden>
+			<h1><strong>Consulta de Artículos</strong></h1>
+			<p>A continuación se muestran todos los artículos que han sido registrados ordenados por código en forma ascendente.</p>
+			<table class="table-fill">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Categoría</th>
+						<th>Código</th>
+					</tr>
+				</thead>
+				<tbody id="contenidoTablaArt">
+				</tbody>
+			</table><br><br>
+		</div>
+
+		<div id= "contenidoConsultaTrazPedComp" class="contenidoPagina" hidden>
+			<h1><strong>Consulta de Trazabilidad de Pedido de Compra</strong></h1>
+			<p>Seleccione un cliente y uno de sus pedidos de compra para observar los estados por los cuales pasó.</p>
+			<div id="trazCliente" class="trazabilidad">
+				<p><strong>Cliente</strong></p>
+				<select id="selectClienteConTraz" class="select_box" onchange="pedidosDeCliente(getInput('selectClienteConTraz'))"></select>
+			</div>
+			<div id="trazPedidos" class="trazabilidad">
+				<p><strong>Pedidos</strong></p>
+				<select id="selectPedidosTraz" class="select_box" onchange="detalleTraz(getInput('selectPedidosTraz'))"></select>
+			</div>
+			<div id="trazEstados" class="trazabilidad">
+				<p><strong>Trazabilidad del Pedido de Compra</strong></p>
+				<table id="tablaTrazPedComp" class="table-fill" >
+					<thead>
+						<tr>
+							<th>Estado</th>
+							<th>Fecha</th>
+							<th>Observaciones</th>
+						</tr>
+					</thead>
+					<tbody id="contenidotablaTrazPedComp">
+					</tbody>
+				</table><br><br>
+			</div>
+		</div>
+
+		<div id= "contenidoConsultaPedidos" class="contenidoPagina" hidden>
+			<h1><strong>Consulta de Pedidos</strong></h1>
+			<p>Seleccione un cliente, se mostrará una gráfica con la cantidad total pagada por cada categoría de artículos entre todos sus pedidos de compra. </p>
+			<p><strong>Cliente</strong></p>
+			<div id="consultaPedidos" class="consultaPedidos">
+				<select id="selectClienteConPed" class="select_box" onchange="displayGrafica(getInput('selectClienteConPed'))"></select>
+			</div>
+			<div id="grafica" class="consultaPed">
+				<canvas id="graficaDeBarras"></canvas>
+			</div>
+		</div>
+
+		<div id= "contenidoConsultaPedSim" class="contenidoPagina" hidden>
+			<h1><strong>Consulta de Pedidos Similares</strong></h1>
+			<p>Seleccione un pedido, se mostrarán los pedidos en los cuales exista una coincidencia de compra de al menos 3 artículos</p>
+			<div id="consultaPedidosSimilares" class="consultaPedSim">
+				<p><strong>Pedidos</strong></p>
+				<select id="selectPedidoPedSim" class="select_box" onchange="fillPedidoSimilarTabla1(getInput('selectPedidoPedSim'))"></select><br><br>
+				<table id="tablaPed1" class="table-fill" hidden>
+					<thead>
+						<tr>
+							<th>Artículo</th>
+							<th>Cantidad</th>
+							<th>Precio Unitario</th>
+							<th>SubTotal</th>
+						</tr>
+					</thead>
+					<tbody id="contenidoTablaPed1">
+						
+					</tbody>
+				</table>
+				<br><br>
+				<p><strong>Pedidos Similares</strong></p>
+				<select id="pedidosSimilares" class="select_box" onchange="fillPedidoSimilarTabla2(getInput('pedidosSimilares'))"></select><br><br>
+				<table id="tablaPed2" class="table-fill" hidden>
+					<thead>
+						<tr>
+							<th>Artículo</th>
+							<th>Cantidad</th>
+							<th>Precio Unitario</th>
+							<th>SubTotal</th>
+						</tr>
+					</thead>
+					<tbody id="contenidoTablaPed2">
+
+					</tbody>
+				</table>
+				<br><br>
+			</div>
+		</div>
+	</body>
+</html>
