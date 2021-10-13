@@ -292,7 +292,7 @@ function cambiarFotoCat(categoria){
 		$(".catFoto").attr("src","img/juguetes.jpg");
 	}
 	if(categoria=="Escolares"){
-		 $(".catFoto").attr("src","img/escolares.jpeg");
+		 $(".catFoto").attr("src","img/escolares.jpg");
 	}
 	if(categoria=="Escritorio"){
 		 $(".catFoto").attr("src","img/escritorio.jpg");
